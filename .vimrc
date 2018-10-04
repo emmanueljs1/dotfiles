@@ -100,6 +100,10 @@ nnoremap <S-h> zh
 nnoremap <S-Right> zl
 nnoremap <S-Left> zh
 
+" vertical split with Ctrl+n
+inoremap <C-n> <ESC>:vsp<CR>==gi
+noremap <C-n> :vsp<CR>
+
 " change column limit to 80 characters for ocaml/haskell files
 autocmd FileType ocaml,haskell setlocal colorcolumn=81
 
