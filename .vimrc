@@ -78,6 +78,7 @@ set sidescroll=1
 set nowrap
 set columns=130
 set lines=45
+set timeoutlen=1000 ttimeoutlen=0
 
 filetype plugin indent on
 syntax on
