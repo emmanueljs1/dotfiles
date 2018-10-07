@@ -31,4 +31,7 @@ in .vimrc then everything after will not be included
 <h2>Dependencies:</h2>
 
 - Some things that are probably already installed (git, clang, python)
-- One of the Vundle plugins is Rust dependent (rust.vim)
+- You'll need to install [Powerline fonts](https://github.com/powerline/fonts) (has an easy install
+script as well) and then set your terminal font to a Powerline font for the airline status bar to
+display properly. Alternatively, you can remove the line that says "Plugin 'vim-airline/vim-airline'"
+to get rid of the status bar.
