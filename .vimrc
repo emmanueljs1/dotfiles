@@ -53,7 +53,11 @@ let g:NERDToggleCheckAllLines = 1
 
 " Vim Options "
 
-color dracula
+try
+    color dracula
+catch /^Vim\%((\a\+)\)\=:E185/
+    echo "Color scheme dracula not found (if first-time setup then you should continue with ENTER)"
+endtry
 
 set tabstop=4
 set expandtab
