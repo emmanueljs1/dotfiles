@@ -55,10 +55,10 @@ let g:NERDToggleCheckAllLines = 1
 
 color dracula
 
-set tabstop=2
+set tabstop=4
 set expandtab
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=4
+set shiftwidth=4
 set colorcolumn=101
 set number
 set backspace=indent,eol,start
@@ -88,13 +88,22 @@ endif
 " change column limit to 80 characters for ocaml/haskell files
 autocmd FileType ocaml,haskell setlocal colorcolumn=81
 
+autocmd FileType ocaml,haskell setlocal tabstop=2
+autocmd FileType ocaml,haskell setlocal softtabstop=2
+autocmd FileType ocaml,haskell setlocal shiftwidth=2
+
 " Key Mappings "
 
 " Space in visual mode moves selected line(s) by one space
 vnoremap <Space> :s/^/ /<CR>
 vnoremap <Backspace> :s/^.//<CR>
 
-vnoremap <C-c> <plug>NerdCommenterComment
+" Ctrl+c to comment visual selection
+vnoremap <C-c> :call NERDComment(1, 'toggle')<CR>
+
+" d does not take contents into register (use x instead)
+nnoremap d "_d
+vnoremap d "_d
 
 " Ctrl+P opens up project view
 silent! noremap <C-p> :NERDTreeToggle<CR>
