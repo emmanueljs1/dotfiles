@@ -2,7 +2,7 @@
 
 <h2>Installing:</h2>
 
-Clone this repo, then running:
+Clone this repo <em>into your root dir</em>, then running:
 
 ```
 ./install.sh
