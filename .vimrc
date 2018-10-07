@@ -11,24 +11,45 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'dracula/vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rust-lang/rust.vim'
-Plugin 'beyondmarc/glsl.vim'
+Plugin 'scrooloose/nerdtree' " project explorer
+Plugin 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
+Plugin 'scrooloose/nerdcommenter' " autocommenting
+Plugin 'vim-airline/vim-airline' " status bar
+Plugin 'vim-airline/vim-airline-themes' " theme
+Plugin 'tpope/vim-fugitive' " git info
+Plugin 'vim-syntastic/syntastic' " syntax checker
+Plugin 'Valloric/YouCompleteMe' " autocompletion
+Plugin 'rust-lang/rust.vim' " rust support
+Plugin 'beyondmarc/glsl.vim' " glsl support
+Plugin 'joshdick/onedark.vim' " theme
+Plugin 'sheerun/vim-polyglot' " advanced syntax highlighting
 call vundle#end()            " required
 
 " Vundle Plugin Options "
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+let g:onedark_termcolors=256
 
 let NERDTreeShowHidden=1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme='onedark'
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -47,16 +68,31 @@ let g:NERDCompactSexyComs = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "M",
+    \ "Staged"    : "A",
+    \ "Untracked" : "N",
+    \ "Renamed"   : "R",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "D",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+
 " add nerdtree explorer automatically (optional, uncomment below)
 " autocmd VimEnter * NERDTree .
 " autocmd VimEnter * wincmd w
 
 " Vim Options "
 
+syntax on
+
 try
-    color dracula
+    colorscheme onedark
 catch /^Vim\%((\a\+)\)\=:E185/
-    echo "Color scheme dracula not found (if first-time setup then you should continue with ENTER)"
+    echo "Color scheme not found (if first-time setup then you should continue with ENTER)"
 endtry
 
 set tabstop=4
@@ -67,7 +103,6 @@ set colorcolumn=101
 set number
 set backspace=indent,eol,start
 set mouse=a
-set bg=light
 set backup
 set backupdir=~/.backup
 set directory=~/.vimswap
@@ -81,9 +116,8 @@ set lines=45
 set timeoutlen=1000 ttimeoutlen=0
 
 filetype plugin indent on
-syntax on
 
-" use mac terminal's cursor
+" use different cursor
 if has('macunix')
   let &t_SI.="\e[5 q"
   let &t_SR.="\e[4 q"
