@@ -1,3 +1,5 @@
+" Vundle Configuration "
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -11,13 +13,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'dracula/vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rust-lang/rust.vim'
+Plugin 'beyondmarc/glsl.vim'
 call vundle#end()            " required
+
+" Vundle Plugin Options "
 
 let NERDTreeShowHidden=1
 
@@ -34,12 +40,26 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_w = 1
 let g:syntastic_check_on_wq = 0
 
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+" add nerdtree explorer automatically (optional, uncomment below)
+" autocmd VimEnter * NERDTree .
+" autocmd VimEnter * wincmd w
+
+" Vim Options "
+
 color dracula
 
 set tabstop=2
 set expandtab
-set colorcolumn=101
+set softtabstop=2
 set shiftwidth=2
+set colorcolumn=101
 set number
 set backspace=indent,eol,start
 set mouse=a
@@ -52,10 +72,11 @@ set splitbelow
 set clipboard=unnamed
 set sidescroll=1
 set nowrap
-
-" reize window if too small
 set columns=130
 set lines=45
+
+filetype plugin indent on
+syntax on
 
 " use mac terminal's cursor
 if has('macunix')
@@ -64,12 +85,16 @@ if has('macunix')
   let &t_EI.="\e[1 q"
 endif
 
-filetype plugin indent on
-syntax on
+" change column limit to 80 characters for ocaml/haskell files
+autocmd FileType ocaml,haskell setlocal colorcolumn=81
 
-" add nerdtree explorer automatically (optional, uncomment below)
-" autocmd VimEnter * NERDTree .
-" autocmd VimEnter * wincmd w
+" Key Mappings "
+
+" Space in visual mode moves selected line(s) by one space
+vnoremap <Space> :s/^/ /<CR>
+vnoremap <Backspace> :s/^.//<CR>
+
+vnoremap <C-c> <plug>NerdCommenterComment
 
 " Ctrl+P opens up project view
 silent! noremap <C-p> :NERDTreeToggle<CR>
@@ -84,7 +109,6 @@ endif
 " Tab/Shift-Tab in insert/visual mode for indents 
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-inoremap <S-Tab> <C-d>
 
 "C+j/k to move text up/down
 inoremap <C-j> <Esc>:m .+1<CR>==gi
@@ -99,13 +123,12 @@ nnoremap <S-l> zl
 nnoremap <S-h> zh
 nnoremap <S-Right> zl
 nnoremap <S-Left> zh
+inoremap <S-Right> <ESC>zl
+inoremap <S-Left> <ESC>zh
 
 " vertical split with Ctrl+n
 inoremap <C-n> <ESC>:vsp<CR>==gi
 noremap <C-n> :vsp<CR>
-
-" change column limit to 80 characters for ocaml/haskell files
-autocmd FileType ocaml,haskell setlocal colorcolumn=81
 
 if has('terminal')
   function! ExitNormalMode()
