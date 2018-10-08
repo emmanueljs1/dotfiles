@@ -6,6 +6,7 @@ export PATH="/usr/local/bin:$PATH"
 # Make ls use colors
 export CLICOLOR=1
 alias ls='ls -Fa'
+alias recunzip='find . -name '*.zip' -execdir unzip {} \;'
 
 # define colors
 C_DEFAULT="\[\033[m\]"
