@@ -99,7 +99,6 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 set shiftwidth=4
-set colorcolumn=101
 set number
 set backspace=indent,eol,start
 set mouse=a
@@ -124,8 +123,18 @@ if has('macunix')
   let &t_EI.="\e[1 q"
 endif
 
-" change column limit to 80 characters for ocaml/haskell files
-autocmd FileType ocaml,haskell setlocal colorcolumn=81
+function! AddColumnLimit()
+    if &modifiable
+        if &filetype ==# 'ocaml' || &filetype==# 'haskell'
+            setlocal colorcolumn=81
+        else
+            setlocal colorcolumn=101
+        endif
+    endif
+endfunction
+
+" add a column limit to modifiable buffers
+autocmd BufEnter * call AddColumnLimit()
 
 autocmd FileType ocaml,haskell setlocal tabstop=2
 autocmd FileType ocaml,haskell setlocal softtabstop=2
