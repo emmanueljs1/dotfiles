@@ -27,14 +27,11 @@ call vundle#end()            " required
 
 " Vundle Plugin Options "
 
-" let terminal use true colors for onedark theme
-if (empty($TMUX))
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+" let iterm use true colors for onedark theme
+if $TERM_PROGRAM == 'iTerm.app'
+    if (has("termguicolors"))
+       set termguicolors
+     endif
 endif
 
 let NERDTreeShowHidden=1
@@ -80,6 +77,17 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " Vim Options "
 
+" use vertical bar in iterm/terminal
+if $TERM_PROGRAM == 'Apple_Terminal'
+   let &t_SI.="\e[5 q"
+   let &t_SR.="\e[4 q"
+   let &t_EI.="\e[1 q"
+elseif $TERM_PROGRAM == 'iTerm.app'
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
 syntax on
 
 silent! colorscheme onedark
@@ -102,13 +110,6 @@ set nowrap
 set timeoutlen=1000 ttimeoutlen=0
 
 filetype plugin indent on
-
-" use different cursor
-if has('macunix')
-  let &t_SI.="\e[5 q"
-  let &t_SR.="\e[4 q"
-  let &t_EI.="\e[1 q"
-endif
 
 function! AddColumnLimit()
     if &modifiable
