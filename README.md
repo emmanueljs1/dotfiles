@@ -35,5 +35,5 @@ in .vimrc then everything after will not be included
 script as well) and then set your terminal font to a Powerline font for the airline status bar to
 display properly. Alternatively, you can remove the line that says "Plugin 'vim-airline/vim-airline'"
 to get rid of the status bar.
-- The onedark theme is best on [iTerm2](https://www.iterm2.com/) (with Preferences -> Terminal -> 'Save lines to scrollback in alternate screen mode' unchecked), which also lets you
+- The onedark.vim theme is best on [iTerm2](https://www.iterm2.com/) (with Preferences -> Terminal -> 'Save lines to scrollback in alternate screen mode' unchecked), which also lets you
 map combinations with the ⌘ (CMD) to Ctrl+<key> combinations, which is nice if you're used to using the command key over control.
