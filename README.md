@@ -33,7 +33,6 @@ in .vimrc then everything after will not be included
 - Some things that are probably already installed (git, clang, python)
 - You'll need to install [Powerline fonts](https://github.com/powerline/fonts) (has an easy install
 script as well) and then set your terminal font to a Powerline font for the airline status bar to
-display properly. Alternatively, you can remove the line that says "Plugin 'vim-airline/vim-airline'"
-to get rid of the status bar.
+display properly. Alternatively, you can change the line `let g:airline_powerline_fonts=1` to `let g:airline_powerline_fonts=0`.
 - The onedark.vim theme is best on [iTerm2](https://www.iterm2.com/) (with Preferences -> Terminal -> 'Save lines to scrollback in alternate screen mode' unchecked), which also lets you
 map combinations with the ⌘ (CMD) to Ctrl+<key> combinations, which is nice if you're used to using the command key over control.
