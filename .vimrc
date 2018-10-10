@@ -23,6 +23,8 @@ Plugin 'rust-lang/rust.vim' " rust support
 Plugin 'beyondmarc/glsl.vim' " glsl support
 Plugin 'joshdick/onedark.vim' " theme
 Plugin 'sheerun/vim-polyglot' " advanced syntax highlighting
+Plugin 'majutsushi/tagbar' " sidebar for tags
+Plugin 'junegunn/fzf.vim' " fuzzy finder
 call vundle#end()            " required
 
 " Vundle Plugin Options "
@@ -74,6 +76,22 @@ let g:NERDTreeIndicatorMapCustom = {
 " add nerdtree explorer automatically (optional, uncomment below)
 " autocmd VimEnter * NERDTree .
 " autocmd VimEnter * wincmd w
+
+let g:merlin_disable_default_keybindings=1
+
+let g:tagbar_type_rust = {
+\ 'ctagstype' : 'rust',
+\ 'kinds' : [
+    \'T:types,type definitions',
+    \'f:functions,function definitions',
+    \'g:enum,enumeration names',
+    \'s:structure names',
+    \'m:modules,module names',
+    \'c:consts,static constants',
+    \'t:traits',
+    \'i:impls,trait implementations',
+\]
+\}
 
 " Vim Options "
 
@@ -146,10 +164,13 @@ vnoremap d "_d
 " Ctrl+P opens up project view
 silent! noremap <C-p> :NERDTreeToggle<CR>
 
+" Ctrl+Shift+P opens up tag sidebar view
+silent! noremap <C-S-p> :TagbarToggle<CR>
+
 " Tab in normal mode opens up terminal window
 nnoremap <Tab> :vert term<CR>
 
-" Tab/Shift-Tab in insert/visual mode for indents 
+" Tab/Shift-Tab in visual mode for indents
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
