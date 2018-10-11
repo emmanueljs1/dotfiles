@@ -30,7 +30,8 @@ in .vimrc then everything after will not be included
 
 <h2>Dependencies:</h2>
 
-- Some things that are probably already installed (git, clang, python)
+- Some things that are probably already installed (vim, git, clang, python)
+    - For terminal inside vim functionality, you need vim 8.1
 - Some plugin dependencies (you can remove the relevant plugin for each of these instead of getting the dependency)
     - [ctags](https://github.com/universal-ctags/ctags) for the [tagbar](https://github.com/majutsushi/tagbar) plugin, which lets you view the current file more concisely
     - [fzf](https://github.com/junegunn/fzf) for the [fzf-vim](https://github.com/junegunn/fzf.vim) plugin, super useful plugin that lets you search within your project
