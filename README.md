@@ -27,10 +27,12 @@ in .vimrc then everything after will not be included
 - For syntastic to work with nerdtree-git-plugin add `nested` right before `call` in the `nerdtreegitplugin` augroup definition in ~/.vim/nerdtree-git-plugin/nerdtree_plugin/git_status.vim (only after running `./install.sh`)
 - If you have merlin installed (`opam install merlin`), running `opam user-setup install` should configure Vim to use merlin
 - YouCompleteMe provides autocompletion for other things, you can re-install it with more options if you want (instructions [here](https://valloric.github.io/YouCompleteMe/))
+    - If you want YouCompleteMe to provide autocompletion for different languages (rust, ocaml, etc.), you'll probably want to export these paths in your bashrc/zshrc/bash_profile
 
 <h2>Dependencies:</h2>
 
-- Some things that are probably already installed (vim, git, clang, python)
+- zsh (4.9 or greater) for [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+- Some things that are probably already installed (vim, git, clang, python, curl/wget)
     - For terminal inside vim functionality, you need vim 8.1
 - Some plugin dependencies (you can remove the relevant plugin for each of these instead of getting the dependency)
     - [ctags](https://github.com/universal-ctags/ctags) for the [tagbar](https://github.com/majutsushi/tagbar) plugin, which lets you view the current file more concisely

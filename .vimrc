@@ -20,7 +20,6 @@ Plugin 'tpope/vim-fugitive' " git info
 Plugin 'vim-syntastic/syntastic' " syntax checker
 Plugin 'Valloric/YouCompleteMe' " autocompletion
 Plugin 'rust-lang/rust.vim' " rust support
-Plugin 'beyondmarc/glsl.vim' " glsl support
 Plugin 'joshdick/onedark.vim' " theme
 Plugin 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plugin 'majutsushi/tagbar' " sidebar for tags
@@ -129,24 +128,25 @@ set timeoutlen=1000 ttimeoutlen=0
 
 filetype plugin indent on
 
-function! AddColumnLimit()
-    if &modifiable
-        setlocal colorcolumn=101
-    endif
-endfunction
-
-" add a column limit to modifiable buffers
-autocmd BufEnter * call AddColumnLimit()
-
 function! SwitchToFunctionalMode()
     setlocal tabstop=2
     setlocal softtabstop=2
     setlocal shiftwidth=2
-    setlocal colorcolumn=81
 endfunction
 
-" switch to functional mode for ocaml/haskell/scala files
-autocmd FileType ocaml,haskell,scala call SwitchToFunctionalMode()
+function! SetupModifiableBuffer()
+    if &modifiable
+        if &ft ==# 'ocaml' || &ft ==# 'scala' || &ft ==# 'haskell'
+            call SwitchToFunctionalMode()
+            setlocal colorcolumn=81
+        else
+            setlocal colorcolumn=101
+        endif
+    endif
+endfunction
+
+" set up modifiable buffers
+autocmd BufEnter * call SetupModifiableBuffer()
 
 " Key Mappings "
 
@@ -165,7 +165,7 @@ vnoremap d "_d
 silent! noremap <C-p> :NERDTreeToggle<CR>
 
 " Ctrl+Shift+P opens up tag sidebar view
-silent! noremap <C-S-p> :TagbarToggle<CR>
+silent! noremap <S-p> :TagbarToggle<CR>
 
 " Tab in normal mode opens up terminal window
 nnoremap <Tab> :vert term<CR>
