@@ -17,9 +17,8 @@ Plugin 'scrooloose/nerdcommenter' " autocommenting
 Plugin 'vim-airline/vim-airline' " status bar
 Plugin 'vim-airline/vim-airline-themes' " theme
 Plugin 'tpope/vim-fugitive' " git info
-Plugin 'vim-syntastic/syntastic' " syntax checker
+Plugin 'w0rp/ale'
 Plugin 'Valloric/YouCompleteMe' " autocompletion
-Plugin 'rust-lang/rust.vim' " rust support
 Plugin 'joshdick/onedark.vim' " theme
 Plugin 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plugin 'majutsushi/tagbar' " sidebar for tags
@@ -28,11 +27,17 @@ call vundle#end()            " required
 
 " Vundle Plugin Options "
 
-" let iterm use true colors for onedark theme
-if $TERM_PROGRAM == 'iTerm.app'
+" use true colors for onedark theme
+if has('macunix')
+    if $TERM_PROGRAM == 'iTerm.app'
+        if (has("termguicolors"))
+           set termguicolors
+       endif
+    endif
+else
     if (has("termguicolors"))
        set termguicolors
-     endif
+   endif
 endif
 
 let NERDTreeShowHidden=1
@@ -40,17 +45,7 @@ let NERDTreeShowHidden=1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='onedark'
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_w = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_balloons = 1
+let g:airline#extensions#ale#enabled = 1
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -124,6 +119,7 @@ set splitbelow
 set clipboard=unnamed
 set sidescroll=1
 set nowrap
+set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 
 filetype plugin indent on
@@ -167,8 +163,20 @@ silent! noremap <C-p> :NERDTreeToggle<CR>
 " Ctrl+Shift+P opens up tag sidebar view
 silent! noremap <S-p> :TagbarToggle<CR>
 
+" Alt+j/k to switch between errors
+if has('macunix')
+    nmap <silent> ∆ <Plug>(ale_previous_wrap)
+    nmap <silent> ˚ <Plug>(ale_next_wrap)
+else
+    nmap <silent> <A-j> <Plug>(ale_previous_wrap)
+    nmap <silent> <A-k> <Plug>(ale_next_wrap)
+endif
+
 " Tab in normal mode opens up terminal window
 nnoremap <Tab> :vert term<CR>
+
+" don't need to press shift+;
+nnoremap ; :
 
 " Tab/Shift-Tab in visual mode for indents
 vnoremap <Tab> >gv

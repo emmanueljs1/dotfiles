@@ -18,9 +18,6 @@ mkdir -p ~/.vimswap
 mkdir -p ~/.vim/bundle 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-# install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 # make backups
 for file in $files; do
     mv ~/.$file $olddir
@@ -31,11 +28,12 @@ done
 vim +PluginInstall +qall
 
 cd ~/.vim/bundle/YouCompleteMe
-
 options="--clang-completer"
-
 ./install.py $options
 
-source .zshrc
-zsh
+# install oh-my-zsh
+curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+
 echo "dotfiles installed successfully"
+echo "edit line starting with 'export ZSH' of ~/.zshrc to have the absolute path to your root dir"
+echo "then you can run `zsh` and voila, you're done"
