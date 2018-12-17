@@ -35,7 +35,6 @@ in .vimrc then everything after will not be included
 - Some things that are hopefully already installed: vim, git, clang, cmake, python2.7, curl/wget
     - For terminal inside vim functionality, you need vim 8
 - Some plugin dependencies (you can remove the relevant plugin for each of these instead of getting the dependency)
-    - [ctags](https://github.com/universal-ctags/ctags) for the [tagbar](https://github.com/majutsushi/tagbar) plugin, which lets you view the current file more concisely
     - [fzf](https://github.com/junegunn/fzf) for the [fzf-vim](https://github.com/junegunn/fzf.vim) plugin, super useful plugin that lets you search within your project
     - [Powerline fonts](https://github.com/powerline/fonts) (has an easy install script as well) and then set your terminal font to a Powerline font for 
       the [airline](https://github.com/vim-airline/vim-airline) status bar to display properly. Alternatively, you can change the line 

@@ -2,6 +2,8 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export CLICOLOR=1
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/emma/.oh-my-zsh"

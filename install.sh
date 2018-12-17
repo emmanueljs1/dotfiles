@@ -1,13 +1,13 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_backup          # old dotfiles backup directory
-files="vimrc zshrc"        # list of files/folders in homedir
+files="vimrc zshrc"               # list of files/folders in homedir
 
 if test -d dir; then 
     echo "dotfiles directory found, starting installation"
 else
     echo "dotfiles directory not found (must be in root directory)"
+    exit 1
 fi
-
 # create olddir
 mkdir -p $olddir
 
@@ -24,6 +24,13 @@ for file in $files; do
     scp -r $dir/.$file ~/.$file
 done
 
+if [ "$(uname)" == "Darwin" ]; then
+    if [ -d /Applications/iTerm.app ]; then
+        mv ~/Library/Preferences/com.googlecode.iterm2.plist $olddir 
+        scp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+    fi
+fi
+
 # install and configure vim plugins
 vim +PluginInstall +qall
 
@@ -32,7 +39,7 @@ options="--clang-completer"
 ./install.py $options
 
 # install oh-my-zsh
-curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "dotfiles installed successfully"
 echo "edit line starting with 'export ZSH' of ~/.zshrc to have the absolute path to your root dir"
