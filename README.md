@@ -24,10 +24,7 @@ in .vimrc then everything after will not be included
 
 <h2>Notes:</h2>
 
-- For syntastic to work with nerdtree-git-plugin add `nested` right before `call` in the `nerdtreegitplugin` augroup definition in ~/.vim/nerdtree-git-plugin/nerdtree_plugin/git_status.vim (only after running `./install.sh`)
 - If you have merlin installed (`opam install merlin`), running `opam user-setup install` should configure Vim to use merlin
-- YouCompleteMe provides autocompletion for other things, you can re-install it with more options if you want (instructions [here](https://valloric.github.io/YouCompleteMe/))
-    - If you want YouCompleteMe to provide autocompletion for different languages (rust, ocaml, etc.), you'll probably want to export these paths in your bashrc/zshrc/bash_profile
 
 <h2>Dependencies:</h2>
 
@@ -35,7 +32,6 @@ in .vimrc then everything after will not be included
 - Some things that are hopefully already installed: vim, git, clang, cmake, python2.7, curl/wget
     - For terminal inside vim functionality, you need vim 8
 - Some plugin dependencies (you can remove the relevant plugin for each of these instead of getting the dependency)
-    - [fzf](https://github.com/junegunn/fzf) for the [fzf-vim](https://github.com/junegunn/fzf.vim) plugin, super useful plugin that lets you search within your project
     - [Powerline fonts](https://github.com/powerline/fonts) (has an easy install script as well) and then set your terminal font to a Powerline font for 
       the [airline](https://github.com/vim-airline/vim-airline) status bar to display properly. Alternatively, you can change the line 
       `let g:airline_powerline_fonts=1` to `let g:airline_powerline_fonts=0` in `~/.vimrc`

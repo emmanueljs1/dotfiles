@@ -24,19 +24,8 @@ for file in $files; do
     scp -r $dir/.$file ~/.$file
 done
 
-if [ "$(uname)" == "Darwin" ]; then
-    if [ -d /Applications/iTerm.app ]; then
-        mv ~/Library/Preferences/com.googlecode.iterm2.plist $olddir 
-        scp com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
-    fi
-fi
-
 # install and configure vim plugins
 vim +PluginInstall +qall
-
-cd ~/.vim/bundle/YouCompleteMe
-options="--clang-completer"
-./install.py $options
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

@@ -18,10 +18,8 @@ Plugin 'vim-airline/vim-airline' " status bar
 Plugin 'vim-airline/vim-airline-themes' " theme
 Plugin 'tpope/vim-fugitive' " git info
 Plugin 'w0rp/ale' " syntax checker
-Plugin 'Valloric/YouCompleteMe' " autocompletion
 Plugin 'joshdick/onedark.vim' " theme
 Plugin 'sheerun/vim-polyglot' " advanced syntax highlighting
-Plugin 'junegunn/fzf.vim' " fuzzy finder
 call vundle#end()            " required
 
 " Vundle Plugin Options "
