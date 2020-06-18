@@ -3,26 +3,24 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
+call plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree' " project explorer
-Plugin 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
-Plugin 'scrooloose/nerdcommenter' " autocommenting
-Plugin 'vim-airline/vim-airline' " status bar
-Plugin 'vim-airline/vim-airline-themes' " theme
-Plugin 'tpope/vim-fugitive' " git info
-Plugin 'w0rp/ale' " syntax checker
-Plugin 'joshdick/onedark.vim' " theme
-Plugin 'sheerun/vim-polyglot' " advanced syntax highlighting
-call vundle#end()            " required
-
-" Vundle Plugin Options "
+Plug 'VundleVim/Vundle.vim'
+Plug 'scrooloose/nerdtree' " project explorer
+Plug 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
+Plug 'scrooloose/nerdcommenter' " autocommenting
+Plug 'vim-airline/vim-airline' " status bar
+Plug 'vim-airline/vim-airline-themes' " theme
+Plug 'tpope/vim-fugitive' " git info
+Plug 'dense-analysis/ale' " syntax checker
+Plug 'joshdick/onedark.vim' " theme
+Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'derekwyatt/vim-scala'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
+call plug#end()
 
 " use true colors for onedark theme
 if has('macunix')
@@ -37,7 +35,22 @@ else
    endif
 endif
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
 let NERDTreeShowHidden=1
+
+let g:ale_set_balloons = 1
+let g:ale_set_loclist = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -118,6 +131,7 @@ set sidescroll=1
 set nowrap
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
+set eol
 
 filetype plugin indent on
 
@@ -129,7 +143,7 @@ endfunction
 
 function! SetupModifiableBuffer()
     if &modifiable
-        if &ft ==# 'ocaml' || &ft ==# 'scala' || &ft ==# 'haskell'
+        if &ft ==# 'ocaml' || &ft ==# 'haskell'
             call SwitchToFunctionalMode()
             setlocal colorcolumn=81
         else
@@ -141,6 +155,8 @@ endfunction
 " set up modifiable buffers
 autocmd BufEnter * call SetupModifiableBuffer()
 
+au BufRead,BufNewFile *.sbt set filetype=scala
+
 " Key Mappings "
 
 " Space in visual mode moves selected line(s) by one space
@@ -150,11 +166,13 @@ vnoremap <Backspace> :s/^.//<CR>
 " Ctrl+c to comment visual selection
 vnoremap <C-c> :call NERDComment(1, 'toggle')<CR>
 
-" d does not take contents into register (use x instead)
+" d/D does not take contents into register (use x instead)
 nnoremap d "_d
 vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
 
-" Ctrl+P opens up project view
+" Ctrl+p opens up project view
 silent! noremap <C-p> :NERDTreeToggle<CR>
 
 " Ctrl+Shift+P opens up tag sidebar view
@@ -169,8 +187,10 @@ else
     nmap <silent> <A-k> <Plug>(ale_next_wrap)
 endif
 
-" Tab in normal mode opens up terminal window
-nnoremap <Tab> :vert term<CR>
+" Tab in normal mode opens up new tab
+nnoremap <Tab> :tabnew<CR>
+
+nnoremap ~ :vert term<CR>
 
 " don't need to press shift+;
 nnoremap ; :
@@ -195,9 +215,22 @@ nnoremap <S-Left> zh
 inoremap <S-Right> <ESC>zl
 inoremap <S-Left> <ESC>zh
 
-" vertical split with Ctrl+n
-inoremap <C-n> <ESC>:vsp<CR>==gi
-noremap <C-n> :vsp<CR>
+" bind K to grep word under cursor
+nnoremap K <Esc>:Ag <C-R><C-W><CR>
+
+" bind t to :Files
+nnoremap t <Esc>:Files<CR>
+
+" bind m to :NERDTreeFind
+nnoremap m <Esc>:NERDTreeFind<CR>
+
+" Ag shows preview (need `bat` for syntax highlighting)
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview('right:50%'))
+
+" Files shows preview (need `bat` for syntax highlighting)
+command! -bang -nargs=* Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%'))
 
 if has('terminal')
   function! ExitNormalMode()
@@ -216,6 +249,6 @@ if has('terminal')
   endfunction
 
   " scrolling within terminal window
-  tmap <silent> <ScrollWheelUp> <c-w>:call EnterNormalMode()<CR>
+  tmap <C-n> <c-w>N
 endif
 
