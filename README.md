@@ -28,6 +28,7 @@ in .vimrc then everything after will not be included
 
 <h2>Dependencies:</h2>
 
+- [yarn](https://classic.yarnpkg.com/en/) for [coc.nvim](https://github.com/neoclide/coc.nvim)
 - zsh (4.9 or greater) for [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - Some things that are hopefully already installed: vim, git, clang, cmake, python2.7, curl/wget
     - For terminal inside vim functionality, you need vim 8
