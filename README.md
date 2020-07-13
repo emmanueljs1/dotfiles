@@ -37,5 +37,8 @@ in .vimrc then everything after will not be included
       the [airline](https://github.com/vim-airline/vim-airline) status bar to display properly. Alternatively, you can change the line 
       `let g:airline_powerline_fonts=1` to `let g:airline_powerline_fonts=0` in `~/.vimrc`
     - [fzf](https://github.com/junegunn/fzf) for the [fzf-vim](https://github.com/junegunn/fzf.vim) plugin, super useful plugin that lets you search within your project
+    - [ag](https://github.com/ggreer/the_silver_searcher) for fzf-vim's project search feature + for grepping
+    - [bat](https://github.com/sharkdp/bat) for fzf-vim's project search feature to syntax highlight file previews (**optional**)
+    - [fd](https://github.com/sharkdp/fd) for fzf-vim's file searching
     - [iTerm2](https://www.iterm2.com/) (with Preferences -> Terminal -> 'Save lines to scrollback in alternate screen mode' unchecked)
       for the [onedark.vim](https://github.com/joshdick/onedark.vim) color scheme to look better
