@@ -96,4 +96,4 @@ export LANG=en_US.UTF-8
 #
 alias ls='ls -Fa'
 alias recunzip="find . -name '*.zip' -execdir unzip {} \;"
-
+export FZF_DEFAULT_COMMAND='fd --type f'
