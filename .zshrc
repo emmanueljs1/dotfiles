@@ -5,9 +5,6 @@ export CLICOLOR=1
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Path to your oh-my-zsh installation.
-export ZSH="/Users/emma/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -96,4 +93,13 @@ export LANG=en_US.UTF-8
 #
 alias ls='ls -Fa'
 alias recunzip="find . -name '*.zip' -execdir unzip {} \;"
+
+function gitsha(){
+    REV_IDX=${1:-0}
+    COMMIT_SHA=$(git rev-parse HEAD^$REV_IDX)
+    echo "${COMMIT_SHA}" | tr -d '\n' | pbcopy
+    COMMIT_DESC=$(git rev-list --format=%B --max-count=1 HEAD^$REV_IDX)
+    echo "Copied to clipboard: ${COMMIT_DESC}"
+}
+
 export FZF_DEFAULT_COMMAND='fd --type f'

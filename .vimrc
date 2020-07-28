@@ -251,4 +251,3 @@ if has('terminal')
   " scrolling within terminal window
   tmap <C-n> <c-w>N
 endif
-

@@ -28,8 +28,19 @@ done
 vim +PluginInstall +qall
 
 # install oh-my-zsh
+CURR_PWD=$(pwd)
+
+cd ~
+
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+cd ~/.oh-my-zsh
+OH_MY_ZSH_PWD=$(pwd)
+
+echo '"do-not-include' >> ~/.vimrc
+echo "#do-not-include" >> ~/.zshrc
+echo "export ZSH='$OH_MY_ZSH_PWD'" >> ~/.zshrc
+
+cd $CURR_PWD
+
 echo "dotfiles installed successfully"
-echo "edit line starting with 'export ZSH' of ~/.zshrc to have the absolute path to your root dir"
-echo "then you can run `zsh` and voila, you're done"
