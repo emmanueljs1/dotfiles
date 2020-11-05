@@ -64,7 +64,7 @@ let g:NERDCompactSexyComs = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "M",
     \ "Staged"    : "A",
     \ "Untracked" : "N",
@@ -132,6 +132,7 @@ set nowrap
 set ignorecase
 set timeoutlen=1000 ttimeoutlen=0
 set eol
+set hlsearch
 
 filetype plugin indent on
 
@@ -223,6 +224,9 @@ nnoremap t <Esc>:Files<CR>
 
 " bind m to :NERDTreeFind
 nnoremap m <Esc>:NERDTreeFind<CR>
+
+" double esc unhighlights search results
+nnoremap <esc><esc> :noh<return>
 
 " Ag shows preview (need `bat` for syntax highlighting)
 command! -bang -nargs=* Ag
