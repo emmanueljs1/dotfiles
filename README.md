@@ -8,7 +8,9 @@ Clone this repo <em>into your root dir</em>, then running:
 ./install.sh
 ``` 
 
-should do everything
+should do everything to have your terminal / vim up and running.
+
+Can append contents of `.gitconfig` to your own root `.gitconfig`.
 
 <h2>Updating dotfiles:</h2>
 
@@ -33,7 +35,7 @@ in .vimrc then everything after will not be included
 - Some things that are hopefully already installed: vim, git, clang, cmake, python2.7, curl/wget
     - For terminal inside vim functionality, you need vim 8
 - Some plugin dependencies (you can remove the relevant plugin for each of these instead of getting the dependency)
-    - [Powerline fonts](https://github.com/powerline/fonts) (has an easy install script as well) and then set your terminal font to a Powerline font for 
+    - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts#patched-fonts) and then set your terminal font to an installed Nerd Font for 
       the [airline](https://github.com/vim-airline/vim-airline) status bar to display properly. Alternatively, you can change the line 
       `let g:airline_powerline_fonts=1` to `let g:airline_powerline_fonts=0` in `~/.vimrc`
     - [fzf](https://github.com/junegunn/fzf) for the [fzf-vim](https://github.com/junegunn/fzf.vim) plugin, super useful plugin that lets you search within your project
