@@ -2,7 +2,7 @@ dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_backup          # old dotfiles backup directory
 files="vimrc zshrc"               # list of files/folders in homedir
 
-if test -d dir; then 
+if [ -d $dir ]; then
     echo "dotfiles directory found, starting installation"
 else
     echo "dotfiles directory not found (must be in root directory)"
@@ -15,8 +15,6 @@ mkdir -p $olddir
 mv ~/.vim $olddir/.vim
 mkdir -p ~/.backup
 mkdir -p ~/.vimswap
-mkdir -p ~/.vim/bundle 
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # make backups
 for file in $files; do
@@ -24,8 +22,11 @@ for file in $files; do
     scp -r $dir/.$file ~/.$file
 done
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # install and configure vim plugins
-vim +PluginInstall +qall
+vim +PlugInstall
 
 # install oh-my-zsh
 CURR_PWD=$(pwd)
