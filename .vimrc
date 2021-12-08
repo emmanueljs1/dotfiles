@@ -3,6 +3,8 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set rtp+=/opt/homebrew/opt/fzf
+
 call plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
@@ -17,7 +19,7 @@ Plug 'joshdick/onedark.vim' " theme
 Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'derekwyatt/vim-scala'
-Plug '/usr/local/opt/fzf'
+Plug '/usr/homebrew/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 call plug#end()
@@ -54,7 +56,6 @@ let g:ale_set_loclist = 1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='onedark'
 let g:airline#extensions#ale#enabled = 1
 
 " Add spaces after comment delimiters by default
@@ -114,6 +115,7 @@ syntax on
 
 silent! colorscheme onedark
 
+set encoding=utf-8
 set tabstop=4
 set expandtab
 set softtabstop=4
