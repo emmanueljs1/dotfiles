@@ -1,0 +1,12 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	fixup = commit -a --fixup=HEAD
+	amend = commit -a --amend
+[core]
+	excludesfile = ~/.gitignore
+[pull]
+	rebase = true
