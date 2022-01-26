@@ -15,11 +15,14 @@ Plug 'vim-airline/vim-airline' " status bar
 Plug 'vim-airline/vim-airline-themes' " theme
 Plug 'tpope/vim-fugitive' " git info
 Plug 'dense-analysis/ale' " syntax checker
+Plug 'arcticicestudio/nord-vim' " theme
 Plug 'joshdick/onedark.vim' " theme
 Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'derekwyatt/vim-scala'
 Plug '/usr/homebrew/bin/fzf'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 call plug#end()
@@ -53,6 +56,10 @@ let NERDTreeShowHidden=1
 
 let g:ale_set_balloons = 1
 let g:ale_set_loclist = 1
+
+let g:ale_linters = {
+    \   'haskell': ['stack-ghc', 'stack-build', 'hlint', 'hfmt'],
+    \}
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -113,6 +120,8 @@ endif
 
 syntax on
 
+" enable to use nord theme
+"silent! colorscheme nord
 silent! colorscheme onedark
 
 set encoding=utf-8
