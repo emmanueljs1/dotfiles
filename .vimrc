@@ -14,9 +14,11 @@ Plug 'scrooloose/nerdcommenter' " autocommenting
 Plug 'vim-airline/vim-airline' " status bar
 Plug 'vim-airline/vim-airline-themes' " theme
 Plug 'tpope/vim-fugitive' " git info
-Plug 'dense-analysis/ale' " syntax checker
 Plug 'arcticicestudio/nord-vim' " theme
 Plug 'joshdick/onedark.vim' " theme
+Plug 'sainnhe/everforest' "theme
+Plug 'NLKNguyen/papercolor-theme' "theme
+Plug 'pineapplegiant/spaceduck' "theme
 Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'derekwyatt/vim-scala'
@@ -25,6 +27,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
+Plug 'whonore/Coqtail'
 call plug#end()
 
 " use true colors for onedark theme
@@ -54,16 +57,8 @@ endif
 
 let NERDTreeShowHidden=1
 
-let g:ale_set_balloons = 1
-let g:ale_set_loclist = 1
-
-let g:ale_linters = {
-    \   'haskell': ['stack-ghc', 'stack-build', 'hlint', 'hfmt'],
-    \}
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#ale#enabled = 1
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -120,10 +115,9 @@ endif
 
 syntax on
 
-" enable to use nord theme
-"silent! colorscheme nord
-silent! colorscheme onedark
+silent! colorscheme spaceduck
 
+set background=dark
 set encoding=utf-8
 set tabstop=4
 set expandtab
@@ -176,7 +170,7 @@ vnoremap <Space> :s/^/ /<CR>
 vnoremap <Backspace> :s/^.//<CR>
 
 " Ctrl+c to comment visual selection
-vnoremap <C-c> :call NERDComment(1, 'toggle')<CR>
+vnoremap <C-c> :call nerdcommenter#Comment(1, 'toggle')<CR>
 
 " d/D does not take contents into register (use x instead)
 nnoremap d "_d
@@ -189,15 +183,6 @@ silent! noremap <C-p> :NERDTreeToggle<CR>
 
 " Ctrl+Shift+P opens up tag sidebar view
 silent! noremap <S-p> :TagbarToggle<CR>
-
-" Alt+j/k to switch between errors
-if has('macunix')
-    nmap <silent> ∆ <Plug>(ale_previous_wrap)
-    nmap <silent> ˚ <Plug>(ale_next_wrap)
-else
-    nmap <silent> <A-j> <Plug>(ale_previous_wrap)
-    nmap <silent> <A-k> <Plug>(ale_next_wrap)
-endif
 
 " Tab in normal mode opens up new tab
 nnoremap <Tab> :tabnew<CR>
@@ -266,3 +251,16 @@ if has('terminal')
   " scrolling within terminal window
   tmap <C-n> <c-w>N
 endif
+
+" coc.nvim configuration
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nnoremap <silent><leader>b <Plug>(coc-diagnostic-prev)
+nnoremap <silent><leader>n <Plug>(coc-diagnostic-next)
+nnoremap <silent><leader>f  <Plug>(coc-fix-current)
