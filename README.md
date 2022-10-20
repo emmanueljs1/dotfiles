@@ -28,9 +28,12 @@ in .vimrc then everything after will not be included
 
 - If you have merlin installed (`opam install merlin`), running `opam user-setup install` should configure Vim to use merlin
 
+- Configure coc.nvim language servers (e.g. for [Haskell](https://github.com/neoclide/coc.nvim/wiki/Language-servers#haskell) and [OCaml](https://github.com/neoclide/coc.nvim/wiki/Language-servers#ocaml-and-reasonml))
+
 <h2>Dependencies:</h2>
 
 - [yarn](https://classic.yarnpkg.com/en/) for [coc.nvim](https://github.com/neoclide/coc.nvim)
+    - If this dependency is missed, `:PlugInstall` will not suffice -- go into `~/.vim/plugged/coc.nvim` and run `yarn install` 
 - zsh (4.9 or greater) for [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - Some things that are hopefully already installed: vim, git, clang, cmake, python2.7, curl/wget
     - For terminal inside vim functionality, you need vim 8
