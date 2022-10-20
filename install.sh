@@ -11,16 +11,20 @@ fi
 # create olddir
 mkdir -p $olddir
 
+# make backups
+for file in $files; do
+    mv ~/.$file $olddir
+done
+
 # vim specific setup
 mv ~/.vim $olddir/.vim
 mkdir -p ~/.backup
 mkdir -p ~/.vimswap
+scp -r $dir/.vimrc ~/.vimrc
 
-# make backups
-for file in $files; do
-    mv ~/.$file $olddir
-    scp -r $dir/.$file ~/.$file
-done
+#zsh specific setup
+echo "export ZSH=/Users/${LOGNAME}/.oh-my-zsh" >> ~/.zshrc
+cat $dir/.zshrc >> ~/.zshrc
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
