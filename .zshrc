@@ -5,8 +5,11 @@ export EDITOR="$VISUAL"
 ZSH_THEME="awesomepanda"
 CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
+
+export NVM_LAZY_LOAD=true
+
 plugins=(
-  git
+  git zsh-nvm
 )
 
 source $ZSH/oh-my-zsh.sh
