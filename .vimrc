@@ -1,13 +1,6 @@
-" Vundle Configuration "
-
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
 set rtp+=/opt/homebrew/opt/fzf
 
 call plug#begin('~/.vim/plugged')
-" let Vundle manage Vundle, required
-Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree' " project explorer
 Plug 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
 Plug 'scrooloose/nerdcommenter' " autocommenting
@@ -20,7 +13,7 @@ Plug 'sainnhe/everforest' "theme
 Plug 'NLKNguyen/papercolor-theme' "theme
 Plug 'pineapplegiant/spaceduck' "theme
 Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'derekwyatt/vim-scala'
 Plug '/usr/homebrew/bin/fzf'
 Plug 'neovimhaskell/haskell-vim'
@@ -28,6 +21,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'whonore/Coqtail'
+Plug 'psosera/ott-vim'
 call plug#end()
 
 " use true colors for onedark theme
@@ -113,6 +107,14 @@ elseif $TERM_PROGRAM == 'iTerm.app'
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
+augroup CoqtailHighlights
+  autocmd!
+  autocmd ColorScheme *
+    \  hi def CoqtailChecked ctermbg=236
+    \| hi def CoqtailSent    ctermbg=237
+augroup END
+
+filetype plugin indent on
 syntax on
 
 silent! colorscheme spaceduck
@@ -139,7 +141,6 @@ set timeoutlen=1000 ttimeoutlen=0
 set eol
 set hlsearch
 
-filetype plugin indent on
 
 function! SwitchToFunctionalMode()
     setlocal tabstop=2
@@ -159,9 +160,10 @@ function! SetupModifiableBuffer()
 endfunction
 
 " set up modifiable buffers
-autocmd BufEnter * call SetupModifiableBuffer()
-
-au BufRead,BufNewFile *.sbt set filetype=scala
+augroup custom
+    autocmd BufEnter * call SetupModifiableBuffer()
+    autocmd BufEnter *.ott set filetype=ott
+augroup end
 
 " Key Mappings "
 
@@ -212,8 +214,14 @@ nnoremap <S-Left> zh
 inoremap <S-Right> <ESC>zl
 inoremap <S-Left> <ESC>zh
 
-" bind K to grep word under cursor
-nnoremap K <Esc>:Ag <C-R><C-W><CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  endif
+endfunction
 
 " bind t to :Files
 nnoremap t <Esc>:Files<CR>
