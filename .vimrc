@@ -21,7 +21,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'whonore/Coqtail'
-Plug 'psosera/ott-vim'
+Plug 'emmanueljs1/ott-vim'
+Plug 'emmanueljs1/coq-vim-conceal'
 call plug#end()
 
 " use true colors for onedark theme
@@ -110,8 +111,8 @@ endif
 augroup CoqtailHighlights
   autocmd!
   autocmd ColorScheme *
-    \  hi def CoqtailChecked ctermbg=236
-    \| hi def CoqtailSent    ctermbg=237
+    \  hi def CoqtailChecked ctermbg=DarkBlue
+    \| hi def CoqtailSent    ctermbg=DarkBlue
 augroup END
 
 filetype plugin indent on
