@@ -1,5 +1,3 @@
-set rtp+=/opt/homebrew/opt/fzf
-
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree' " project explorer
 Plug 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
@@ -11,7 +9,7 @@ Plug 'arcticicestudio/nord-vim' " theme
 Plug 'joshdick/onedark.vim' " theme
 Plug 'sainnhe/everforest' "theme
 Plug 'NLKNguyen/papercolor-theme' "theme
-Plug 'pineapplegiant/spaceduck' "theme
+Plug 'pineapplegiant/spaceduck', {'branch': 'main'} "theme
 Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'derekwyatt/vim-scala'
@@ -22,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'whonore/Coqtail'
 Plug 'emmanueljs1/ott-vim'
-Plug 'emmanueljs1/coq-vim-conceal'
+Plug 'emmanueljs1/coq-vim-conceal', {'branch': 'main'}
 call plug#end()
 
 " use true colors for onedark theme
@@ -115,17 +113,13 @@ augroup CoqtailHighlights
     \| hi def CoqtailSent    ctermbg=DarkBlue
 augroup END
 
-filetype plugin indent on
 syntax on
 
 silent! colorscheme spaceduck
 
 set background=dark
 set encoding=utf-8
-set tabstop=4
 set expandtab
-set softtabstop=4
-set shiftwidth=4
 set number
 set backspace=indent,eol,start
 set mouse=a
@@ -142,7 +136,6 @@ set timeoutlen=1000 ttimeoutlen=0
 set eol
 set hlsearch
 
-
 function! SwitchToFunctionalMode()
     setlocal tabstop=2
     setlocal softtabstop=2
@@ -155,6 +148,9 @@ function! SetupModifiableBuffer()
             call SwitchToFunctionalMode()
             setlocal colorcolumn=81
         else
+            set tabstop=4
+            set softtabstop=4
+            set shiftwidth=4
             setlocal colorcolumn=101
         endif
     endif
@@ -164,6 +160,7 @@ endfunction
 augroup custom
     autocmd BufEnter * call SetupModifiableBuffer()
     autocmd BufEnter *.ott set filetype=ott
+    autocmd BufEnter *.mng set filetype=tex
 augroup end
 
 " Key Mappings "
