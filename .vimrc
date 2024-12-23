@@ -12,15 +12,13 @@ Plug 'NLKNguyen/papercolor-theme' "theme
 Plug 'pineapplegiant/spaceduck', {'branch': 'main'} "theme
 Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'derekwyatt/vim-scala'
-Plug '/usr/homebrew/bin/fzf'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf.vim'
+" TODO: install fzf
+" TODO: Plug 'path/to/fzf'
+" Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-Plug 'whonore/Coqtail'
 Plug 'emmanueljs1/ott-vim'
-Plug 'emmanueljs1/coq-vim-conceal', {'branch': 'main'}
 call plug#end()
 
 " use true colors for onedark theme
@@ -106,18 +104,11 @@ elseif $TERM_PROGRAM == 'iTerm.app'
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-augroup CoqtailHighlights
-  autocmd!
-  autocmd ColorScheme *
-    \  hi def CoqtailChecked ctermbg=DarkBlue
-    \| hi def CoqtailSent    ctermbg=DarkBlue
-augroup END
-
 syntax on
 
-silent! colorscheme spaceduck
+silent! colorscheme everforest
 
-set background=dark
+set background=light
 set encoding=utf-8
 set expandtab
 set number
@@ -141,6 +132,8 @@ function! SwitchToFunctionalMode()
     setlocal softtabstop=2
     setlocal shiftwidth=2
 endfunction
+
+
 
 function! SetupModifiableBuffer()
     if &modifiable
@@ -211,6 +204,7 @@ nnoremap <S-Right> zl
 nnoremap <S-Left> zh
 inoremap <S-Right> <ESC>zl
 inoremap <S-Left> <ESC>zh
+inoremap jk <Esc>
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
