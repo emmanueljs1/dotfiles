@@ -1,3 +1,5 @@
+" TODO: set rtp+=/path/to/fzf
+
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree' " project explorer
 Plug 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
