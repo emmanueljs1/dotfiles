@@ -1,3 +1,5 @@
+# TODO: export ZSH='path/to/.oh-my-zsh'
+
 export CLICOLOR=1
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -6,11 +8,7 @@ ZSH_THEME="awesomepanda"
 CASE_SENSITIVE="true"
 ENABLE_CORRECTION="true"
 
-export NVM_LAZY_LOAD=true
-
-plugins=(
-  git zsh-nvm
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
