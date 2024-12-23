@@ -22,10 +22,6 @@ mkdir -p ~/.backup
 mkdir -p ~/.vimswap
 scp -r $dir/.vimrc ~/.vimrc
 
-#zsh specific setup
-echo "export ZSH=/Users/${LOGNAME}/.oh-my-zsh" >> ~/.zshrc
-cat $dir/.zshrc >> ~/.zshrc
-
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -42,9 +38,13 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 cd ~/.oh-my-zsh
 OH_MY_ZSH_PWD=$(pwd)
 
+# zsh specific setup
+echo "export ZSH='$OH_MY_ZSH_PWD'" >> ~/.zshrc
+cat $dir/.zshrc >> ~/.zshrc
+
+# for any extra machine-specific stuff
 echo '"do-not-include' >> ~/.vimrc
 echo "#do-not-include" >> ~/.zshrc
-echo "export ZSH='$OH_MY_ZSH_PWD'" >> ~/.zshrc
 
 cd $CURR_PWD
 
