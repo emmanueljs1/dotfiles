@@ -1,5 +1,3 @@
-" TODO: set rtp+=/path/to/fzf
-
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree' " project explorer
 Plug 'Xuyuanp/nerdtree-git-plugin' " project explorer git info
@@ -16,9 +14,8 @@ Plug 'sheerun/vim-polyglot' " advanced syntax highlighting
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovimhaskell/haskell-vim'
 Plug 'easymotion/vim-easymotion'
-" TODO: install fzf
-" TODO: Plug 'path/to/fzf'
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'emmanueljs1/ott-vim'
 call plug#end()
@@ -108,9 +105,9 @@ endif
 
 syntax on
 
-silent! colorscheme everforest
+silent! colorscheme papercolor
 
-set background=light
+set background=dark
 set encoding=utf-8
 set expandtab
 set number
