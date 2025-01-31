@@ -38,9 +38,14 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 cd ~/.oh-my-zsh
 OH_MY_ZSH_PWD=$(pwd)
 
-# zsh specific setup
-echo "export ZSH='$OH_MY_ZSH_PWD'" >> ~/.zshrc
+# zsh setup
 cat $dir/.zshrc >> ~/.zshrc
+
+# starship setup
+curl -sS https://starship.rs/install.sh | sh
+
+mkdir -p ~/.config
+cat $dir/starship.toml >> ~/.config/starship.toml
 
 # for any extra machine-specific stuff
 echo '"do-not-include' >> ~/.vimrc
