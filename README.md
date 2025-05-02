@@ -37,6 +37,7 @@ in .vimrc then everything after will not be included
 - zsh (4.9 or greater) for [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - Some things that are hopefully already installed: vim, git, clang, cmake, python2.7, curl/wget
     - For terminal inside vim functionality, you need vim 8
+- [starship](https://starship.rs) for a nice terminal prompt
 - Some plugin dependencies (you can remove the relevant plugin for each of these instead of getting the dependency)
     - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts#patched-fonts) and then set your terminal font to an installed Nerd Font for 
       the [airline](https://github.com/vim-airline/vim-airline) status bar to display properly. Alternatively, you can change the line 
