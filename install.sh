@@ -1,6 +1,6 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_backup          # old dotfiles backup directory
-files="vimrc zshrc"               # list of files/folders in homedir
+files="vimrc zshrc gitconfig"     # list of files/folders in homedir
 
 if [ -d $dir ]; then
     echo "dotfiles directory found, starting installation"
