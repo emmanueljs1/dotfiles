@@ -14,9 +14,10 @@ source $ZSH/oh-my-zsh.sh
 
 export LANG=en_US.UTF-8
 
-alias ls='ls -Fa'
+alias ls='ls -A'
 alias recunzip="find . -name '*.zip' -execdir unzip {} \;"
 alias v='vi'
+alias g='git'
 
 function gitsha(){
     REV_IDX=${1:-0}
@@ -29,3 +30,4 @@ function gitsha(){
 export FZF_DEFAULT_COMMAND='fd --type f'
 
 eval "$(starship init zsh)"
+
